@@ -1,0 +1,94 @@
+# Пример конфигурации для настройки туннелирования в Linux
+# Example configuration for Linux tunneling setup
+
+# ===========================================
+# Основные настройки / Basic Settings
+# ===========================================
+
+NETWORK_INTERFACE="eth0"                # Основной сетевой интерфейс / Main network interface
+TUNNEL_IP_RANGE="192.168.100.0/24"      # IP диапазон для туннеля / IP range for tunnel
+GATEWAY_IP="192.168.1.1"                # IP адрес шлюза / Gateway IP address
+DNS_SERVERS="8.8.8.8,8.8.4.4"          # DNS серверы / DNS servers
+
+# ===========================================
+# SSH туннель / SSH Tunnel
+# ===========================================
+
+SSH_PORT="22"                           # SSH порт / SSH port
+SSH_USER="tunneluser"                   # SSH пользователь / SSH user
+REMOTE_HOST="your-server.com"           # Удаленный хост / Remote host
+
+# Примеры SSH команд / SSH command examples:
+# ssh -L 8080:localhost:80 ${SSH_USER}@${REMOTE_HOST}
+# ssh -D 1080 ${SSH_USER}@${REMOTE_HOST}
+# ssh -R 9090:localhost:22 ${SSH_USER}@${REMOTE_HOST}
+
+# ===========================================
+# OpenVPN настройки / OpenVPN Settings
+# ===========================================
+
+OPENVPN_PORT="1194"                     # OpenVPN порт / OpenVPN port
+OPENVPN_PROTOCOL="udp"                  # Протокол (udp/tcp) / Protocol (udp/tcp)
+OPENVPN_SUBNET="10.8.0.0"              # OpenVPN подсеть / OpenVPN subnet
+OPENVPN_NETMASK="255.255.255.0"        # Маска сети / Network mask
+
+# ===========================================
+# Безопасность / Security
+# ===========================================
+
+FIREWALL_ENABLED="true"                 # Включить брандмауэр / Enable firewall
+FAIL2BAN_ENABLED="true"                 # Включить fail2ban / Enable fail2ban
+ALLOWED_NETWORKS="192.168.1.0/24,10.0.0.0/8"  # Разрешенные сети / Allowed networks
+
+# ===========================================
+# Мониторинг / Monitoring
+# ===========================================
+
+LOG_LEVEL="INFO"                        # Уровень логирования / Log level
+LOG_FILE="/var/log/router-tunnel.log"   # Файл логов / Log file
+ENABLE_MONITORING="true"                # Включить мониторинг / Enable monitoring
+
+# ===========================================
+# Автозапуск / Autostart
+# ===========================================
+
+ENABLE_AUTOSTART="true"                 # Автозапуск при загрузке / Autostart on boot
+SERVICE_NAME="router-tunnel"            # Имя сервиса / Service name
+
+# ===========================================
+# Дополнительные настройки / Additional Settings
+# ===========================================
+
+# Максимальное количество соединений / Maximum connections
+MAX_CONNECTIONS="100"
+
+# Таймаут соединения в секундах / Connection timeout in seconds
+CONNECTION_TIMEOUT="30"
+
+# Включить IPv6 поддержку / Enable IPv6 support
+IPV6_ENABLED="false"
+
+# Использовать компрессию / Use compression
+COMPRESSION_ENABLED="true"
+
+# ===========================================
+# Инструкции по использованию / Usage Instructions
+# ===========================================
+
+# 1. Скопируйте этот файл как linux-tunnel-config.conf
+#    Copy this file as linux-tunnel-config.conf
+#
+# 2. Отредактируйте настройки под вашу конфигурацию
+#    Edit settings according to your configuration
+#
+# 3. Запустите скрипт настройки:
+#    Run the setup script:
+#    ./setup-linux-tunnel.sh
+#
+# 4. Для применения конфигурации:
+#    To apply configuration:
+#    source linux-tunnel-config.conf
+#
+# 5. Проверьте статус:
+#    Check status:
+#    ./setup-linux-tunnel.sh --status
